@@ -126,10 +126,16 @@ public class User {
                 '}';
     }
     
-    @Transient
+    @Transient //để chỉ định rằng một trường không nên được lưu trữ trong cơ sở dữ liệu khi sử dụng ORM
     public String getPhotosImagePath() {
     	if (id == null || photos == null)return "/images/default-user.png";
     	
     	return "/user-photos/" + this.id + "/" + this.photos;
+    }
+
+    @Transient
+    public String getFullName() {
+        // Ở đây khi dùng JQuery thì [[${user.getFullName()}]] [[${user.fullName}]] đều đúng vì nó trở tới trường của User
+        return this.firstName + " " + this.lastName;
     }
 }
