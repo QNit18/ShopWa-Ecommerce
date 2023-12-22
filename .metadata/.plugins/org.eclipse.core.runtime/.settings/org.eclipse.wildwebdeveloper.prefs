@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+html.format.indentInnerHtml=true
+javascript.inlayHints.includeInlayEnumMemberValueHints=true
+javascript.inlayHints.includeInlayFunctionLikeReturnTypeHints=true
+javascript.inlayHints.includeInlayFunctionParameterTypeHints=true
+javascript.inlayHints.includeInlayPropertyDeclarationTypeHints=true
+javascript.inlayHints.includeInlayVariableTypeHints=true

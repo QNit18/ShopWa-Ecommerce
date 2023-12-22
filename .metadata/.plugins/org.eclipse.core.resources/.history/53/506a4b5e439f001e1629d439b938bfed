@@ -1,0 +1,16 @@
+package com.shopme.admin;
+
+import java.nio.file.Path;
+
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+public class MVCConfig implements WebMvcConfigurer {
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		Path userPhotosDir = 
+	}
+	
+
+}
