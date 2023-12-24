@@ -1,4 +1,4 @@
-package com.shopme.admin.user;
+package com.shopme.admin.user.export;
 
 import com.shopme.common.entity.User;
 import org.apache.poi.ss.usermodel.CellStyle;
@@ -7,13 +7,9 @@ import org.apache.poi.xssf.usermodel.*;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
-public class UserExcelExporter extends AbstractExporter{
+public class UserExcelExporter extends AbstractExporter {
 
     private XSSFWorkbook workbook ; // Trang excel
     private XSSFSheet sheet ; // 1 bang trong excel
