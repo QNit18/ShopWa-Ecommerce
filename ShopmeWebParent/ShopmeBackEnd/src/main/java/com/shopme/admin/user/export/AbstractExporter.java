@@ -11,10 +11,10 @@ import java.util.List;
 
 public class AbstractExporter {
     public void setResponseHeader(HttpServletResponse response, String contentType,
-                                  String extension) throws IOException {
+                                  String extension, String prefix) throws IOException {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         String timestamp = dateFormat.format(new Date());
-        String fileName = "users_" + timestamp + extension;
+        String fileName = prefix + timestamp + extension;
 
         response.setContentType(contentType);
 

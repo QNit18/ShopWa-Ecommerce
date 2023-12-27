@@ -24,23 +24,7 @@
      class="alert alert-success text-center">[[${message}]]
 </div>
 
-<!--    Lọc tìm kiếm user-->
-<div>
-    <form th:action="@{/users/page/1}" class="form-inline m-3">
-        <input type="hidden" name="sortField" th:value="${sortField}"/>
-        <input type="hidden" name="sortDir" th:value="${sortDir}"/>
-        Filter: &nbsp;
-        <input class="form-control" type="search" name="keyword" th:value="${keyword}" required/>
-        &nbsp; &nbsp;
-        <button type="submit" value="Search" class="btn btn-primary">
-            <i class="fas fa-search"></i>
-        </button>
-        &nbsp; &nbsp;
-        <button type="button" value="Clear" class="btn btn-secondary" onclick="clearFilter()">
-            <i class="fas fa-eraser"></i>
-        </button>
-    </form>
-</div>
+<div th:replace="fragment :: search_form('/users/page/1')"></div>
 
 <!--    Menu bar-->
 <div class="full-details">
@@ -112,55 +96,10 @@
     </div>
 </div>
 
-<div class="text-center m-1" th:if="${totalItems > 0}">
-    <span>Showing user from [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
-</div>
-<div class="text-center m-1" th:unless="${totalItems > 0}">
-    <h2>No user found</h2>
-</div>
-
 <!--    Pagination-->
-<div th:if="${totalPages > 1}">
-    <nav>
-        <ul class="pagination justify-content-center flex-wrap">
-            <li th:class=" ${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                <a th:replace="fragment :: page_link(1, 'First')"></a>
-            </li>
-            <li th:class=" ${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                <a th:replace="fragment :: page_link(${currentPage - 1}, 'Previous')"></a>
-            </li>
-            <li th:class="${currentPage != i} ? 'page-item' : 'page-item active'"
-                th:each="i : ${#numbers.sequence(1, totalPages)}">
-                <a th:replace="fragment :: page_link(${i}, ${i})"></a>
-            </li>
-            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                <a th:replace="fragment :: page_link(${currentPage + 1}, 'Next')"></a></li>
-            <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                <a th:replace="fragment :: page_link(${totalPages}, 'Last')"></a>
-            </li>
-        </ul>
-    </nav>
-</div>
+<div th:replace="fragment :: pagination('/users', 'users')"></div>
 
-<div class="modal fade text-center" id="confirmModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Delete User</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-
-            <div class="modal-body">
-                <span id="confirmText"></span>
-            </div>
-
-            <div class="modal-footer">
-                <a class="btn btn-success" href="" id="yesDelete">Yes</a>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-            </div>
-        </div>
-    </div>
-</div>
+<div th:replace="modal_fragment :: confirm_modal"></div>
 
 <!--Footer-->
 <div th:replace="fragment :: footer"></div>
@@ -168,21 +107,14 @@
 
 <!--</div>-->
 <script type="text/javascript">
+    moduleURL = "[[@{/users}]]";
+
     $(document).ready(function() {
         $(".link-delete").on("click", function(e) {
             e.preventDefault();
-            link = $(this);
-
-            userId = link.attr("userId");
-            $("#yesDelete").attr("href", link.attr("href"));
-            $("#confirmText").text("You want to delete this userId: " + userId);
-            $("#confirmModal").modal();
+            showDeleteConfirmModal($(this), 'user');
         });
     });
-
-	function clearFilter(){
-		window.location = "/ShopmeAdmin/users"
-	}
 
 </script>
 </body>

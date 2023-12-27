@@ -130,7 +130,7 @@ public class UserController {
     }
 
     @GetMapping("/users/delete/{id}")
-    public String deleteUser(@PathVariable(name = "id") Integer id, Model model,
+    public String deleteUser(@PathVariable(name = "id") Integer id,
                              RedirectAttributes redirectAttributes) {
         try {
             userService.delete(id);
@@ -143,7 +143,8 @@ public class UserController {
 
     @GetMapping("/users/{id}/enabled/{status}")
     public String updateUserEnabled(@PathVariable(name = "id") Integer id,
-                                    @PathVariable(name = "status") boolean enabled, RedirectAttributes redirectAttributes) {
+                                    @PathVariable(name = "status") boolean enabled,
+                                    RedirectAttributes redirectAttributes) {
         userService.updateUserEnabledStatus(id, enabled);
         String status = enabled ? "enabled" : "disabled";
         redirectAttributes.addFlashAttribute("message", "The user Id " + id + " has been " + status);
