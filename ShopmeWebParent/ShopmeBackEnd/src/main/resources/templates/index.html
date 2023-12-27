@@ -1,31 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-
-<title>Home - Shopme Admin</title>
-
-<link rel="stylesheet" type="text/css"
-	th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
-
-<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<script type="text/javascript"
-	th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-
-</head>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmls:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragment :: page_head('Home - ShopmeAdmin')"/>
 <body>
-	<div class="container-fluid">
-		<!--    Navbar-->
-		<div th:replace="fragment :: navbar"></div>
+    <!--    Navbar-->
+    <div th:replace="navigation :: navbar"></div>
 
-		<div>
-			<h1>Shopme Admin Control Panel</h1>
-		</div>
-
-<!--		Footer-->
-		<div th:replace="fragment :: footer"></div>
-	</div>
+    <div>
+        <h1>Shopme Admin Control Panel</h1>
+        Welcome
+        <a th:href="@{/account}"
+           sec:authentication="principal.fullname"></a>
+        &nbsp;
+        <span sec:authentication="principal.authorities"></span>
+    </div>
+    <!--		Footer-->
+    <div th:replace="fragment :: footer"></div>
 </body>
 </html>

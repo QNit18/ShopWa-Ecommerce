@@ -31,6 +31,10 @@ public class UserService {
     @Autowired
     private RoleRepository roleRepository;
 
+    public User getByEmail(String email) {
+        return userRepository.getUserByEmail(email);
+    }
+
     public List<User> listAll() {
         return (List<User>) userRepository.findAll();
     }
@@ -68,6 +72,24 @@ public class UserService {
     	}
 
         return userRepository.save(user);
+    }
+
+    public User updateAccount(User userInform) {
+        User userInDb = userRepository.findById(userInform.getId()).get();
+
+        if (!userInform.getPassword().isEmpty()){
+            userInDb.setPassword(userInform.getPassword());
+            encodePassword(userInDb);
+        }
+
+        if (userInform.getPhotos() != null) {
+            userInDb.setPhotos(userInform.getPhotos());
+        }
+
+        userInDb.setFirstName(userInform.getFirstName());
+        userInDb.setLastName(userInform.getLastName());
+
+        return userRepository.save(userInDb);
     }
 
     private void encodePassword(User user) {

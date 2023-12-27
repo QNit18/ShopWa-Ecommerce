@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.logging.Logger;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,4 +47,12 @@ public class FileUploadUtil {
 		}
 	}
 
+    public static void removeDir(String dir) throws IOException {
+		cleanDir(dir);
+		try {
+			Files.delete(Paths.get(dir));
+		} catch (IOException e) {
+			System.out.println("Could not list directory: "+ dir);
+		}
+    }
 }

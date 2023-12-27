@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmls:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragment :: page_head('Error - ShopmeAdmin')"/>
+<body>
+
+<div>
+    <!--    Navbar-->
+    <div th:replace="navigation :: navbar"></div>
+    <div class="text-center">
+        <h2>Sorry, you don't have permission to access this page. (403)</h2>
+    </div>
+    <!--		Footer-->
+    <div th:replace="fragment :: footer"></div>
+</div>
+</body>
+</html>
