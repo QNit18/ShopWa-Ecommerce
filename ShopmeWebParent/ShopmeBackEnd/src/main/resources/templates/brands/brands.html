@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragment :: page_head('Brands - Shopme Admin')"/>
+<body>
+<!--<div class="container-fluid">-->
+<!--    Navbar-->
+<div th:replace="navigation :: navbar"></div>
+
+<div style="margin-top: 10px">
+    <div class="container-fluid">
+        <div class="border">
+            <!--    Thao tác brand-->
+            <div>
+                <h2 class="text-center" style="margin-top: 10px">Manage Brands</h2>
+                <div style="text-align: center; margin-top: 15px">
+                    <a th:href="@{/brands/new}" class="fa-solid fa-circle-plus fa-2x icon-dark "
+                       title="Create New Brands"></a>
+                    &nbsp;&nbsp;
+                    <a th:href="@{/brands/export/csv}" class="fa-solid fa-file-csv fa-2x icon-dark"
+                       title="Export file CSV"></a>
+                </div>
+            </div>
+
+            <!--    Lọc tìm category-->
+            <div th:replace="fragment :: search_form_and_message('/brands/page/1')"></div>
+
+            <!--    Menu bar-->
+            <div class="full-details">
+                <table class="table table-striped table-responsive-xl">
+                    <thead class="table-dark">
+                    <tr>
+                        <th class="hideable-column">Brand ID</th>
+                        <th>Logo</th>
+                        <th th:replace="fragment :: column_link('/brands' ,'name', 'Brand Name', 'none')">
+                        <th>Categories</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="brand : ${listBrands}">
+                        <td class="hideable-column">[[${brand.id}]]</td>
+                        <td>
+                            <img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>
+                        </td>
+                        <td>[[${brand.name}]]</td>
+                        <td>
+                            <th:block th:each="cat : ${brand.categories}">
+                                <span class="badge badge-secondary" th:text="${cat.name}"></span>
+                            </th:block>
+                        </td>
+                        <td>
+                            <div th:replace="fragment :: edit('brand', '/brands/edit/' + ${brand.id})"/>
+                            &nbsp;
+                            <div th:replace="fragment :: delete('brand', ${brand.id}, '/brands/delete/' + ${brand.id}, true)" />
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="less-details">
+                <div th:each="brand : ${listBrands}" class="row m-1">
+                    <div class="col-6">
+                        <img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid"/>
+                    </div>
+                    <div class="col-6">
+                        <div>[[${brand.name}]]</div>
+                        <div class="mt-2">&nbsp;
+                            <div th:replace="fragment :: edit('brand', '/brands/edit/' + ${brand.id})"/>
+                            &nbsp;
+                            <div th:replace="fragment :: delete('brand', ${brand.id}, 'brands/delete/' + ${brand.id}, true)"/>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!--    Pagination-->
+            <div th:replace="fragment :: pagination('/brands', 'brands')"></div>
+
+            <th:block th:unless="${keyword != null}">
+                <div th:replace="fragment :: pagination('/categories', 'top-level categories')"></div>
+            </th:block>
+
+            <div th:replace="modal_fragment :: confirm_modal"></div>
+
+            <div th:replace="fragment :: footer"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        moduleURL = "[[@{/brands}]]";
+
+        $(document).ready(function() {
+            $(".link-delete").on("click", function(e) {
+                e.preventDefault();
+                showDeleteConfirmModal($(this), 'brand');
+            });
+        });
+    </script>
+
+    <!--</div>-->
+</body>
+</html>

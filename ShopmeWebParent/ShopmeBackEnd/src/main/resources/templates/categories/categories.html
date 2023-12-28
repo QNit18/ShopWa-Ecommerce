@@ -14,8 +14,8 @@
                 <h2 class="text-center" style="margin-top: 10px">Manage Categories</h2>
 
                 <div style="text-align: center; margin-top: 15px">
-                    <a th:href="@{/categories/new}" class="fa-solid fa-user-plus fa-2x icon-dark "
-                       title="Create New User"></a>
+                    <a th:href="@{/categories/new}" class="fa-solid fa-circle-plus fa-2x icon-dark "
+                       title="Create New Category"></a>
                     &nbsp;&nbsp;
                     <a th:href="@{/categories/export/csv}" class="fa-solid fa-file-csv fa-2x icon-dark"
                        title="Export file CSV"></a>
@@ -35,7 +35,7 @@
                         <th th:replace="fragment :: column_link('/categories' ,'name', 'Category Name', 'none')">
                         <th class="hideable-column">Alias</th>
                         <th>Enabled</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
